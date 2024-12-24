@@ -2,6 +2,7 @@ package net.happiness;
 
 import net.happiness.adapter.SocketAdapter;
 import net.happiness.adapter.impl.CompositionSocketAdapter;
+import net.happiness.adapter.impl.InheritanceSocketAdapter;
 import net.happiness.model.Voltage;
 
 import java.util.Objects;
@@ -9,11 +10,29 @@ import java.util.Objects;
 public class Main {
 
     public static void main(String[] args) {
-        SocketAdapter compositionAdapter = new CompositionSocketAdapter();
+        testingCompositionAdapter();
+        System.out.println();
+        testingInheritanceAdapter();
+    }
 
-        Voltage voltage220 = compositionAdapter.get220Voltage();
-        Voltage voltage120 = compositionAdapter.get120Voltage();
-        Voltage voltage12 = compositionAdapter.get12Voltage();
+    private static void testingCompositionAdapter() {
+        SocketAdapter socketAdapter = new CompositionSocketAdapter();
+
+        Voltage voltage220 = socketAdapter.get220Voltage();
+        Voltage voltage120 = socketAdapter.get120Voltage();
+        Voltage voltage12 = socketAdapter.get12Voltage();
+
+        test(220, voltage220.getVolts());
+        test(120, voltage120.getVolts());
+        test(12, voltage12.getVolts());
+    }
+
+    private static void testingInheritanceAdapter() {
+        SocketAdapter socketAdapter = new InheritanceSocketAdapter();
+
+        Voltage voltage220 = socketAdapter.get220Voltage();
+        Voltage voltage120 = socketAdapter.get120Voltage();
+        Voltage voltage12 = socketAdapter.get12Voltage();
 
         test(220, voltage220.getVolts());
         test(120, voltage120.getVolts());
